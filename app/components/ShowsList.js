@@ -1,29 +1,29 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Dimensions,
   FlatList,
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
+import utilities from '../utils/utilities';
 
 export default function ShowsList({
   loading,
   numberOfColumns = 3,
   margin = 10,
   onEndReached,
+  onShowPress,
   shows,
 }) {
-  //getting device's screen width
-  const { width } = Dimensions.get('screen');
   // margin * 2 because margin applies on sides
-  const imageWidth = width / numberOfColumns - margin * 2;
+  const imageWidth = utilities.dimensions.width / numberOfColumns - margin * 2;
   const ratio = 1.4;
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
+      onPress={() => onShowPress(item)}
       style={{
         width: imageWidth,
         margin: margin,
