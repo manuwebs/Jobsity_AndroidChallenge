@@ -4,4 +4,7 @@ export default Object.freeze({
   shows: {
     get: '/shows?page=',
   },
+  search: {
+    shows: '/search/shows?q=',
+  },
 });
