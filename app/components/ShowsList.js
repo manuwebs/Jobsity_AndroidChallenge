@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
-import utilities from '../utils/utilities';
+import Utilities from '../utils/Utilities';
+import LoadingIndicator from './LoadingIndicator';
 
 export default function ShowsList({
   loading,
@@ -18,7 +18,7 @@ export default function ShowsList({
   shows,
 }) {
   // margin * 2 because margin applies on sides
-  const imageWidth = utilities.dimensions.width / numberOfColumns - margin * 2;
+  const imageWidth = Utilities.dimensions.width / numberOfColumns - margin * 2;
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -31,7 +31,7 @@ export default function ShowsList({
         resizeMode={'contain'}
         style={{
           backgroundColor: 'green',
-          height: imageWidth * utilities.verticalRatio,
+          height: imageWidth * Utilities.verticalRatio,
         }}
         source={{ uri: item.image?.medium }}
       />
@@ -50,7 +50,7 @@ export default function ShowsList({
       }
       onEndReached={onEndReached}
       renderItem={renderItem}
-      ListFooterComponent={() => (loading ? <ActivityIndicator /> : null)}
+      ListFooterComponent={() => (loading ? <LoadingIndicator /> : null)}
       numColumns={numberOfColumns}
     />
   );

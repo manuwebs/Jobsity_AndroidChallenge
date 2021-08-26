@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import {
-  ActivityIndicator,
   Image,
   SafeAreaView,
   ScrollView,
@@ -10,9 +9,10 @@ import {
 } from 'react-native';
 import ShowsAPI from '../api/ShowsAPI';
 import Accordeon from '../components/Accordeon';
+import LoadingIndicator from '../components/LoadingIndicator';
 import useAPI from '../hooks/useAPI';
 import routes from '../navigation/routes';
-import utilities from '../utils/utilities';
+import Utilities from '../utils/Utilities';
 
 export default function ShowDetailScreen({ navigation, route }) {
   const { id, image, schedule, genres, summary } = route.params;
@@ -35,7 +35,7 @@ export default function ShowDetailScreen({ navigation, route }) {
           source={{ uri: image.original }}
           style={{
             height:
-              (utilities.dimensions.width - 100) * utilities.verticalRatio,
+              (Utilities.dimensions.width - 100) * Utilities.verticalRatio,
           }}
           resizeMode={'contain'}
         />
@@ -66,7 +66,7 @@ export default function ShowDetailScreen({ navigation, route }) {
             </Accordeon>
           ))
         ) : (
-          <ActivityIndicator />
+          <LoadingIndicator />
         )}
       </ScrollView>
     </SafeAreaView>

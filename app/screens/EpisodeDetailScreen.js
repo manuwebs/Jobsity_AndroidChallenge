@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import utilities from '../utils/utilities';
+import Utilities from '../utils/Utilities';
 
 export default function EpisodeDetailScreen({ route }) {
   const { image, number, season, summary } = route.params;
@@ -18,7 +18,7 @@ export default function EpisodeDetailScreen({ route }) {
           source={{ uri: image.original }}
           style={{
             height:
-              (utilities.dimensions.width - 20) * utilities.horizontalRatio,
+              (Utilities.dimensions.width - 20) * Utilities.horizontalRatio,
           }}
           resizeMode={'contain'}
         />
