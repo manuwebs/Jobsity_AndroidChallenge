@@ -3,6 +3,8 @@ export default Object.freeze({
   baseUrl: 'https://api.tvmaze.com',
   shows: {
     get: '/shows?page=',
+    seasonsByShowID: '/shows/:id/seasons',
+    episondesByShowID: '/shows/:id/episodes',
   },
   search: {
     shows: '/search/shows?q=',
