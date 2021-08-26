@@ -19,7 +19,6 @@ export default function ShowsList({
 }) {
   // margin * 2 because margin applies on sides
   const imageWidth = utilities.dimensions.width / numberOfColumns - margin * 2;
-  const ratio = 1.4;
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -32,7 +31,7 @@ export default function ShowsList({
         resizeMode={'contain'}
         style={{
           backgroundColor: 'green',
-          height: imageWidth * ratio,
+          height: imageWidth * utilities.verticalRatio,
         }}
         source={{ uri: item.image?.medium }}
       />
