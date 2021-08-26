@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import routes from './routes';
 import HomeScreen from '../screens/HomeScreen';
 import ShowDetailScreen from '../screens/ShowDetailScreen';
+import EpisodeDetailScreen from '../screens/EpisodeDetailScreen';
 
 const Tab = createNativeStackNavigator();
 
@@ -16,6 +17,11 @@ const AppNavigator = () => (
     <Tab.Screen
       name={routes.SHOW_DETAILS}
       component={ShowDetailScreen}
+      options={({ route }) => ({ title: route.params.name })}
+    />
+    <Tab.Screen
+      name={routes.EPISODE_DETAILS}
+      component={EpisodeDetailScreen}
       options={({ route }) => ({ title: route.params.name })}
     />
   </Tab.Navigator>

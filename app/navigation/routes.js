@@ -2,4 +2,5 @@
 export default Object.freeze({
   HOME: 'Home',
   SHOW_DETAILS: 'ShowDetails',
+  EPISODE_DETAILS: 'EpisodeDetails',
 });
