@@ -4,8 +4,9 @@ import ShowsAPI from '../api/ShowsAPI';
 import SearchBar from '../components/SearchBar';
 import ShowsList from '../components/ShowsList';
 import useAPI from '../hooks/useAPI';
+import routes from '../navigation/routes';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const { data, error, loading, request: getShows } = useAPI(ShowsAPI.get);
   const [page, setPage] = useState(0);
   const [shows, setShows] = useState([]);
@@ -41,6 +42,7 @@ export default function HomeScreen() {
         <ShowsList
           shows={searchResults ?? shows}
           onEndReached={() => (!searchResults ? setPage(page + 1) : null)}
+          onShowPress={item => navigation.navigate(routes.SHOW_DETAILS, item)}
           loading={loading || searchLoading}
         />
       </SafeAreaView>
