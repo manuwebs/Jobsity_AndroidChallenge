@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { AppColors, AppStyles } from '../utils/CommonStyles';
 import Utilities from '../utils/Utilities';
 import AppIcon from './AppIcon';
 import AppRoundButton from './AppRoundButton';
 import AppText from './AppText';
+import EmptyPlaceholder from './EmptyPlaceholder';
 import LoadingIndicator from './LoadingIndicator';
 import PosterPlaceholder from './PosterPlaceholder';
 
@@ -20,6 +21,9 @@ export default function ShowsList({
   const imageWidth = Utilities.dimensions.width / numberOfColumns - margin * 2;
 
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  // scrolls to top everytime shows change (on serach, on cancel)
+  useEffect(() => flatList.current?.scrollToOffset(0), [shows]);
 
   let flatList = useRef(null);
 
@@ -80,15 +84,10 @@ export default function ShowsList({
       <FlatList
         ref={flatList}
         persistentScrollbar
+        contentContainerStyle={{ flexGrow: 1 }}
         data={shows}
         keyExtractor={item => item.id}
-        ListEmptyComponent={() =>
-          !loading && (
-            <AppText style={AppStyles.textCenter}>
-              No hay elementos para mostrar
-            </AppText>
-          )
-        }
+        ListEmptyComponent={() => !loading && <EmptyPlaceholder />}
         onScroll={({ nativeEvent }) =>
           // if y scroll is greather than 10 px then show floating button
           nativeEvent.contentOffset.y > 10
