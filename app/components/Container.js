@@ -17,6 +17,7 @@ export default function Container({ children, style, scrollable = false }) {
       />
       {scrollable ? (
         <ScrollView
+          persistentScrollbar
           style={[styles.innerContainer]}
           contentContainerStyle={style}>
           {children}

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import SearchAPI from '../api/SearchAPI';
 import useAPI from '../hooks/useAPI';
 import useDebounce from '../hooks/useDebounce';
+import AppButton from './AppButton';
+import AppInput from './AppInput';
 
 export default function SearchBar({ searchResults, onError, onLoading }) {
   const [searchCriteria, setSearchCriteria] = useState('');
@@ -40,33 +41,43 @@ export default function SearchBar({ searchResults, onError, onLoading }) {
     searchResults(data ? data.map(d => d.show) : null);
   }, [data]);
 
-  // if an error is thrown, sends error to parent component
+  // if an error is thrown, sends it to parent component
   useEffect(() => {
     onError(error);
   }, [error]);
 
-  // if request is loading, sends status to parent component
+  // if request is loading, sends it to parent component
   useEffect(() => {
     onLoading(loading);
   }, [loading]);
 
   return (
-    <View
-      style={{
-        backgroundColor: 'grey',
-        flex: 1,
-        flexDirection: 'row',
-        height: 50,
-      }}>
-      <TextInput
-        style={{ flex: 4, backgroundColor: 'white', margin: 5 }}
+    <View style={styles.container}>
+      <AppInput
+        style={styles.textInput}
+        containerStyle={styles.textInputContainer}
         value={searchCriteria}
         onChangeText={handleSearch}
         placeholder="Ex. The Good Doctor"
       />
-      {data && <Button title="Cancel" onPress={handleCancel} />}
+      {data && (
+        <AppButton
+          title="Cancel"
+          onPress={handleCancel}
+          containerStyles={styles.button}
+        />
+      )}
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  button: {
+    marginLeft: 10,
+  },
+  container: {
+    height: 50,
+    flexDirection: 'row',
+  },
+  textInputContainer: { flex: 4, marginVertical: 5 },
+});

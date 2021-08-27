@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import ShowsAPI from '../api/ShowsAPI';
+import AppText from '../components/AppText';
+import Container from '../components/Container';
 import SearchBar from '../components/SearchBar';
 import ShowsList from '../components/ShowsList';
 import useAPI from '../hooks/useAPI';
 import routes from '../navigation/routes';
+import { AppColors, AppStyles } from '../utils/CommonStyles';
 
 export default function HomeScreen({ navigation }) {
   const { data, error, loading, request: getShows } = useAPI(ShowsAPI.get);
@@ -25,27 +28,52 @@ export default function HomeScreen({ navigation }) {
 
   if (!data && error) {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <Text>Error fetching data</Text>
-      </SafeAreaView>
+      <Container>
+        <AppText style={AppStyles.textCenter}>Error fetching data</AppText>
+      </Container>
     );
   } else {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ height: 50 }}>
+      <Container>
+        <View style={styles.searchBarContainer}>
           <SearchBar
             searchResults={setSearchResults}
             onLoading={setSearchLoading}
-            onError={error => console.log(error)}
+            onError={err => console.log(err)}
           />
         </View>
+        <AppText
+          style={[
+            AppStyles.heading1,
+            AppStyles.alignCenter,
+            styles.mainHeading,
+          ]}>
+          TV Shows
+        </AppText>
         <ShowsList
           shows={searchResults ?? shows}
           onEndReached={() => (!searchResults ? setPage(page + 1) : null)}
           onShowPress={item => navigation.navigate(routes.SHOW_DETAILS, item)}
           loading={loading || searchLoading}
         />
-      </SafeAreaView>
+      </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  mainHeading: {
+    fontWeight: 'bold',
+    marginVertical: 15,
+    borderBottomColor: AppColors.accent,
+    borderBottomWidth: 4,
+    textDecorationColor: AppColors.accent,
+    textDecorationLine: Platform.OS === 'ios' ? 'underline' : null,
+  },
+  searchBarContainer: {
+    height: 65,
+    paddingHorizontal: 10,
+    backgroundColor: AppColors.secondary,
+    justifyContent: 'center',
+  },
+});

@@ -1,14 +1,23 @@
-import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import routes from './routes';
+import React from 'react';
+import EpisodeDetailScreen from '../screens/EpisodeDetailScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ShowDetailScreen from '../screens/ShowDetailScreen';
-import EpisodeDetailScreen from '../screens/EpisodeDetailScreen';
+import { AppColors } from '../utils/CommonStyles';
+import routes from './routes';
 
 const Tab = createNativeStackNavigator();
 
 const AppNavigator = () => (
-  <Tab.Navigator initialRouteName={routes.HOME}>
+  <Tab.Navigator
+    initialRouteName={routes.HOME}
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: AppColors.secondary,
+      },
+      headerTintColor: AppColors.white,
+      headerTitleAlign: 'center',
+    }}>
     <Tab.Screen
       name={routes.HOME}
       component={HomeScreen}
@@ -22,7 +31,9 @@ const AppNavigator = () => (
     <Tab.Screen
       name={routes.EPISODE_DETAILS}
       component={EpisodeDetailScreen}
-      options={({ route }) => ({ title: route.params.name })}
+      options={({ route }) => ({
+        title: route.params.episode.name,
+      })}
     />
   </Tab.Navigator>
 );

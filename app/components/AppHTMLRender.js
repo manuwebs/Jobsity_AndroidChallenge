@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import RenderHTML from 'react-native-render-html';
 import Utilities from '../utils/Utilities';
 
@@ -7,10 +7,14 @@ export default function AppHTMLRender({
   style,
   textAligment = 'justify',
 }) {
-  const tagsStyles = {
-    p: { textAlign: textAligment },
-    b: { fontWeight: 'bold' },
-  };
+  const tagsStyles = useMemo(
+    () => ({
+      p: { textAlign: textAligment },
+      b: { fontWeight: 'bold' },
+    }),
+    [textAligment],
+  );
+
   return (
     <RenderHTML
       source={{ html }}
