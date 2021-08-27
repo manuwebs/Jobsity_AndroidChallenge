@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import ShowsAPI from '../api/ShowsAPI';
 import Accordeon from '../components/Accordeon';
 import AppHTMLRender from '../components/AppHTMLRender';
 import AppText from '../components/AppText';
 import Container from '../components/Container';
 import LoadingIndicator from '../components/LoadingIndicator';
+import PosterPlaceholder from '../components/PosterPlaceholder';
 import useAPI from '../hooks/useAPI';
 import routes from '../navigation/routes';
 import { AppColors, AppStyles } from '../utils/CommonStyles';
@@ -27,42 +28,50 @@ export default function ShowDetailScreen({ navigation, route }) {
 
   return (
     <Container scrollable style={styles.container}>
-      <Image
-        source={{ uri: image.original }}
-        style={{
-          height: (Utilities.dimensions.width - 100) * Utilities.verticalRatio,
-        }}
-        resizeMode={'contain'}
-      />
-
-      <AppText
-        style={[
-          AppStyles.marginHorizontal,
-          AppStyles.marginTop,
-          AppStyles.textRight,
-        ]}>
-        <AppText style={AppStyles.bold}>{schedule.days}'s</AppText> at{' '}
-        {schedule.time} {'\n'}
-        <AppText style={AppStyles.bold}>Genres: </AppText>
-        {genres}
-      </AppText>
-
-      <AppHTMLRender html={summary} style={AppStyles.marginHorizontal} />
-
-      {seasons && episodes ? (
-        <RenderSeasons
-          seasons={seasons}
-          episodes={episodes}
-          onEpisodePress={episode =>
-            navigation.navigate(routes.EPISODE_DETAILS, {
-              showName: route.params.name,
-              episode,
-            })
-          }
+      {image ? (
+        <Image
+          source={{ uri: image.original }}
+          style={styles.image}
+          resizeMode={'contain'}
         />
       ) : (
-        <LoadingIndicator />
+        <PosterPlaceholder style={styles.image} size={100} />
       )}
+
+      <View style={[AppStyles.marginVertical, styles.contentContainer]}>
+        <AppText style={[AppStyles.marginHorizontal, AppStyles.textRight]}>
+          <AppText style={AppStyles.bold}>
+            {schedule.days ? schedule.days + "'s" : 'N/A'}
+          </AppText>
+          {schedule.time && ' at ' + schedule.time}
+        </AppText>
+
+        <AppText style={[AppStyles.marginHorizontal, AppStyles.textRight]}>
+          <AppText style={AppStyles.bold}>Genres: </AppText>
+          {genres.map(g =>
+            genres.indexOf(g) !== genres.length - 1 ? g + ', ' : g,
+          )}
+        </AppText>
+
+        {summary ? (
+          <AppHTMLRender html={summary} style={AppStyles.marginHorizontal} />
+        ) : null}
+
+        {seasons && episodes ? (
+          <RenderSeasons
+            seasons={seasons}
+            episodes={episodes}
+            onEpisodePress={episode =>
+              navigation.navigate(routes.EPISODE_DETAILS, {
+                showName: route.params.name,
+                episode,
+              })
+            }
+          />
+        ) : (
+          <LoadingIndicator />
+        )}
+      </View>
     </Container>
   );
 }
@@ -83,8 +92,12 @@ const RenderSeasons = ({ seasons, episodes, onEpisodePress }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
+  contentContainer: { marginHorizontal: 20 },
+  image: {
+    padding: 5,
+    backgroundColor: AppColors.black,
+    height: (Utilities.dimensions.width - 100) * Utilities.verticalRatio,
+    justifyContent: 'center',
   },
   listItem: {
     borderBottomWidth: 1,

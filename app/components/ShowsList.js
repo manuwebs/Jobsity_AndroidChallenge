@@ -6,6 +6,7 @@ import AppIcon from './AppIcon';
 import AppRoundButton from './AppRoundButton';
 import AppText from './AppText';
 import LoadingIndicator from './LoadingIndicator';
+import PosterPlaceholder from './PosterPlaceholder';
 
 export default function ShowsList({
   loading,
@@ -29,16 +30,31 @@ export default function ShowsList({
         width: imageWidth,
         margin: margin,
       }}>
-      <Image
-        resizeMode={'contain'}
-        style={[
-          {
-            height: imageWidth * Utilities.verticalRatio,
-          },
-          styles.poster,
-        ]}
-        source={{ uri: item.image?.medium }}
-      />
+      {item.image ? (
+        <Image
+          resizeMode={'contain'}
+          style={[
+            {
+              height: imageWidth * Utilities.verticalRatio,
+            },
+            AppStyles.borderRadius,
+          ]}
+          source={{ uri: item.image.medium }}
+        />
+      ) : (
+        <PosterPlaceholder
+          size={50}
+          dark
+          style={[
+            {
+              height: imageWidth * Utilities.verticalRatio,
+            },
+            AppStyles.borderRadius,
+            AppStyles.alignCenter,
+          ]}
+        />
+      )}
+
       <AppText numberOfLines={3} style={[AppStyles.textCenter, styles.label]}>
         {item.name}
       </AppText>
@@ -67,11 +83,11 @@ export default function ShowsList({
         data={shows}
         keyExtractor={item => item.id}
         ListEmptyComponent={() =>
-          !loading ? (
+          !loading && (
             <AppText style={AppStyles.textCenter}>
               No hay elementos para mostrar
             </AppText>
-          ) : null
+          )
         }
         onScroll={({ nativeEvent }) =>
           // if y scroll is greather than 10 px then show floating button
@@ -83,7 +99,7 @@ export default function ShowsList({
         }
         onEndReached={onEndReached}
         renderItem={renderItem}
-        ListFooterComponent={() => (loading ? <LoadingIndicator /> : null)}
+        ListFooterComponent={() => loading && <LoadingIndicator />}
         numColumns={numberOfColumns}
       />
     </>
@@ -94,9 +110,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     fontWeight: '500',
-  },
-  poster: {
-    borderRadius: 10,
   },
   floatingButton: {
     position: 'absolute',
