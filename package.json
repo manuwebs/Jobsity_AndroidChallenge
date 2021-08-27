@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "generate-apk": "cd android && ./gradlew assembleRelease",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
@@ -16,6 +17,7 @@
     "axios": "^0.21.1",
     "react": "17.0.2",
     "react-native": "0.65.1",
+    "react-native-render-html": "^6.0.5",
     "react-native-safe-area-context": "^3.3.0",
     "react-native-screens": "^3.6.0"
   },
