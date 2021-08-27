@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    backgroundColor: AppColors.accent,
+    backgroundColor: AppColors.black,
   },
 });
