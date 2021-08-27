@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		6F6A628D26D8D0C70041A153 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F6A628C26D8D0C70041A153 /* MaterialCommunityIcons.ttf */; };
 		77D38CC12596AACA9FECD3EC /* libPods-Jobsity_AndroidChallenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 290515F1C1E7B9157D3091EB /* libPods-Jobsity_AndroidChallenge.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AA34BE64A0044FC75ACC5909 /* libPods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FFBBE64F301BF96F43E879 /* libPods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.a */; };
@@ -40,6 +41,7 @@
 		15FFBBE64F301BF96F43E879 /* libPods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		290515F1C1E7B9157D3091EB /* libPods-Jobsity_AndroidChallenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Jobsity_AndroidChallenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D91F02E698FF6A36D7919C6 /* Pods-Jobsity_AndroidChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jobsity_AndroidChallenge.release.xcconfig"; path = "Target Support Files/Pods-Jobsity_AndroidChallenge/Pods-Jobsity_AndroidChallenge.release.xcconfig"; sourceTree = "<group>"; };
+		6F6A628C26D8D0C70041A153 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = ../app/assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Jobsity_AndroidChallenge/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EA9842462011A087BB19AF2 /* Pods-Jobsity_AndroidChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jobsity_AndroidChallenge.debug.xcconfig"; path = "Target Support Files/Pods-Jobsity_AndroidChallenge/Pods-Jobsity_AndroidChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		AAF1BA326310FF3B9E4ABB99 /* Pods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests/Pods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6F6A628C26D8D0C70041A153 /* MaterialCommunityIcons.ttf */,
 				13B07FAE1A68108700A75B9A /* Jobsity_AndroidChallenge */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* Jobsity_AndroidChallengeTests */,
@@ -145,7 +148,6 @@
 				AAF1BA326310FF3B9E4ABB99 /* Pods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.debug.xcconfig */,
 				024D9CD9E37E3E11EAEF33D6 /* Pods-Jobsity_AndroidChallenge-Jobsity_AndroidChallengeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6A628D26D8D0C70041A153 /* MaterialCommunityIcons.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
