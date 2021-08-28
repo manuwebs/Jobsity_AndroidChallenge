@@ -5,7 +5,7 @@ import AppText from '../../components/AppText';
 import Container from '../../components/Container';
 import PinBox from '../../components/PinBox';
 import { LockContext } from '../../contexts/LockContext';
-import { AppStyles } from '../../utils/CommonStyles';
+import { AppColors, AppStyles } from '../../utils/CommonStyles';
 import SecureStorage from '../../utils/SecureStorage';
 
 export default function PinSetScreen({ navigation }) {
@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     marginTop: 20,
-    color: 'red',
+    color: AppColors.danger,
   },
 });

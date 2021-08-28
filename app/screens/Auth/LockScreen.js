@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     marginTop: 20,
-    color: 'red',
+    color: AppColors.danger,
   },
   logo: {
     position: 'absolute',

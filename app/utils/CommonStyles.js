@@ -9,6 +9,8 @@ export const AppColors = {
   secondary: '#3f8a89',
   secondaryDark: '#387b7a',
   accent: '#a56f67',
+  gold: '#FFD700',
+  danger: '#bb2124', //'#d9534f'
 };
 
 const margin = 10;
