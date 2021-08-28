@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
-import ShowsAPI from '../api/ShowsAPI';
-import AppText from '../components/AppText';
-import Container from '../components/Container';
-import ErrorPlaceholder from '../components/ErrorPlaceholder';
-import SearchBar from '../components/SearchBar';
-import ShowsList from '../components/ShowsList';
-import useAPI from '../hooks/useAPI';
-import routes from '../navigation/routes';
-import { AppColors, AppStyles } from '../utils/CommonStyles';
+import { StyleSheet, View } from 'react-native';
+import ShowsAPI from '../../api/ShowsAPI';
+import AppText from '../../components/AppText';
+import Container from '../../components/Container';
+import ErrorPlaceholder from '../../components/ErrorPlaceholder';
+import SearchBar from '../../components/SearchBar';
+import ShowsList from '../../components/ShowsList';
+import useAPI from '../../hooks/useAPI';
+import routes from '../../navigation/routes';
+import { AppColors, AppStyles } from '../../utils/CommonStyles';
 
 export default function HomeScreen({ navigation }) {
   const { data, error, loading, request: getShows } = useAPI(ShowsAPI.get);
@@ -45,9 +45,9 @@ export default function HomeScreen({ navigation }) {
         </View>
         <AppText
           style={[
-            AppStyles.heading1,
             AppStyles.alignCenter,
-            styles.mainHeading,
+            AppStyles.marginVertical,
+            AppStyles.mainHeading,
           ]}>
           {searchResults ? 'Search results' : 'TV Shows'}
         </AppText>
@@ -63,14 +63,6 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  mainHeading: {
-    fontWeight: 'bold',
-    marginVertical: 15,
-    borderBottomColor: AppColors.accent,
-    borderBottomWidth: 4,
-    textDecorationColor: AppColors.accent,
-    textDecorationLine: Platform.OS === 'ios' ? 'underline' : null,
-  },
   searchBarContainer: {
     height: 65,
     paddingHorizontal: 10,

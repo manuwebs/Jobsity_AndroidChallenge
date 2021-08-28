@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import EpisodeDetailScreen from '../screens/EpisodeDetailScreen';
-import HomeScreen from '../screens/HomeScreen';
-import ShowDetailScreen from '../screens/ShowDetailScreen';
+import EpisodeDetailScreen from '../screens/Shows/EpisodeDetailScreen';
+import HomeScreen from '../screens/Shows/HomeScreen';
+import ShowDetailScreen from '../screens/Shows/ShowDetailScreen';
 import { AppColors } from '../utils/CommonStyles';
 import routes from './routes';
 
@@ -12,6 +12,9 @@ const ShowsNavigator = () => (
   <Stack.Navigator
     initialRouteName={routes.HOME}
     screenOptions={{
+      headerTitleStyle: {
+        fontSize: 25,
+      },
       headerStyle: {
         backgroundColor: AppColors.secondary,
       },

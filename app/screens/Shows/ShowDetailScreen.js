@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import ShowsAPI from '../api/ShowsAPI';
-import Accordeon from '../components/Accordeon';
-import AppHTMLRender from '../components/AppHTMLRender';
-import AppText from '../components/AppText';
-import Container from '../components/Container';
-import ErrorPlaceholder from '../components/ErrorPlaceholder';
-import LoadingIndicator from '../components/LoadingIndicator';
-import PosterPlaceholder from '../components/PosterPlaceholder';
-import useAPI from '../hooks/useAPI';
-import routes from '../navigation/routes';
-import { AppColors, AppStyles } from '../utils/CommonStyles';
-import Utilities from '../utils/Utilities';
+import ShowsAPI from '../../api/ShowsAPI';
+import Accordeon from '../../components/Accordeon';
+import AppHTMLRender from '../../components/AppHTMLRender';
+import AppText from '../../components/AppText';
+import Container from '../../components/Container';
+import ErrorPlaceholder from '../../components/ErrorPlaceholder';
+import LoadingIndicator from '../../components/LoadingIndicator';
+import PosterPlaceholder from '../../components/PosterPlaceholder';
+import useAPI from '../../hooks/useAPI';
+import routes from '../../navigation/routes';
+import { AppColors, AppStyles } from '../../utils/CommonStyles';
+import Utilities from '../../utils/Utilities';
 
 export default function ShowDetailScreen({ navigation, route }) {
   const { id, image, schedule, genres, summary } = route.params;
