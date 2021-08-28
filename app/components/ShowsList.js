@@ -23,18 +23,17 @@ export default function ShowsList({
 
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const prevShows = usePrevious(shows);
+  let flatList = useRef(null);
 
   // scrolls to top everytime shows change (on serach, on cancel)
   useEffect(
     () =>
       // makes sure that the current shows doesn't contains the previous shows before scrolling
-      shows.filter(s => prevShows.indexOf(s) >= 0).length !== prevShows?.length
+      shows.filter(s => prevShows?.indexOf(s) >= 0).length !== prevShows?.length
         ? flatList.current?.scrollToOffset(0)
         : null,
     [shows],
   );
-
-  let flatList = useRef(null);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
