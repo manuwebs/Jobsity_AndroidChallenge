@@ -3,6 +3,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import ShowsAPI from '../api/ShowsAPI';
 import AppText from '../components/AppText';
 import Container from '../components/Container';
+import ErrorPlaceholder from '../components/ErrorPlaceholder';
 import SearchBar from '../components/SearchBar';
 import ShowsList from '../components/ShowsList';
 import useAPI from '../hooks/useAPI';
@@ -28,8 +29,8 @@ export default function HomeScreen({ navigation }) {
 
   if (!data && error) {
     return (
-      <Container>
-        <AppText style={AppStyles.textCenter}>Error fetching data</AppText>
+      <Container scrollable onRefresh={() => getShows(0)} refreshing={loading}>
+        <ErrorPlaceholder message={'Error fetching data'} />
       </Container>
     );
   } else {
@@ -48,7 +49,7 @@ export default function HomeScreen({ navigation }) {
             AppStyles.alignCenter,
             styles.mainHeading,
           ]}>
-          TV Shows
+          {searchResults ? 'Search results' : 'TV Shows'}
         </AppText>
         <ShowsList
           shows={searchResults ?? shows}
