@@ -6,4 +6,6 @@ export default Object.freeze({
   SHOWS_STACK: 'ShowsStack',
   SETTINGS_STACK: 'SettingsStack',
   SETTINGS: 'Settings',
+  PIN_SET: 'PinSet',
+  PIN_DELETE: 'PinDelete',
 });
