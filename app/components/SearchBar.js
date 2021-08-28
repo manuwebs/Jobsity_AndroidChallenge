@@ -60,7 +60,7 @@ export default function SearchBar({ searchResults, onError, onLoading }) {
         onChangeText={handleSearch}
         placeholder="Ex. The Good Doctor"
       />
-      {data && (
+      {searchDebounced !== '' && (
         <AppButton
           title="Cancel"
           onPress={handleCancel}
