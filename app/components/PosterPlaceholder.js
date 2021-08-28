@@ -7,7 +7,7 @@ import AppText from './AppText';
 export default function PosterPlaceholder({ style, size, dark = false }) {
   return (
     <View style={[styles.container, dark ? styles.background : null, style]}>
-      <AppIcon name={'television-classic'} size={size} />
+      <AppIcon name={'television-classic-off'} size={size} />
       <AppText style={styles.noImageText}>
         Poster not available at the time
       </AppText>
