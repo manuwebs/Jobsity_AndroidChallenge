@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const AppColors = {
   white: '#FFFFFF',
@@ -18,6 +18,14 @@ export const AppStyles = StyleSheet.create({
     borderRadius: 15,
   },
   heading1: {
+    fontSize: 30,
+  },
+  mainHeading: {
+    fontWeight: 'bold',
+    borderBottomColor: AppColors.accent,
+    borderBottomWidth: 3,
+    textDecorationColor: AppColors.accent,
+    textDecorationLine: Platform.OS === 'ios' ? 'underline' : null,
     fontSize: 30,
   },
   alignCenter: {

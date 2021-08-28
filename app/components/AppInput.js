@@ -8,6 +8,10 @@ export default function AppInput({
   onChangeText,
   containerStyle,
   style,
+  keyboardType = 'default',
+  maxLength,
+  textAlign = 'left',
+  password = false,
 }) {
   return (
     <View style={containerStyle}>
@@ -16,6 +20,10 @@ export default function AppInput({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
+        keyboardType={keyboardType}
+        maxLength={maxLength}
+        textAlign={textAlign}
+        secureTextEntry={password}
       />
     </View>
   );
