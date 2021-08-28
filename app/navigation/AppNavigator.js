@@ -1,40 +1,43 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import EpisodeDetailScreen from '../screens/EpisodeDetailScreen';
-import HomeScreen from '../screens/HomeScreen';
-import ShowDetailScreen from '../screens/ShowDetailScreen';
+import AppIcon from '../components/AppIcon';
 import { AppColors } from '../utils/CommonStyles';
 import routes from './routes';
+import SettingsNavigator from './SettingsNavigator';
+import ShowsNavigator from './ShowsNavigator';
 
-const Tab = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
   <Tab.Navigator
-    initialRouteName={routes.HOME}
-    screenOptions={{
-      headerStyle: {
+    initialRouteName={routes.SHOWS_STACK}
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName = 'play';
+
+        switch (route.name) {
+          case routes.SHOWS_STACK:
+            iconName = focused ? 'movie' : 'movie-outline';
+            break;
+
+          case routes.SETTINGS_STACK:
+            iconName = focused ? 'cog' : 'cog-outline';
+            break;
+        }
+
+        return <AppIcon name={iconName} size={30} color={color} />;
+      },
+      tabBarActiveTintColor: AppColors.white,
+      tabBarInactiveTintColor: AppColors.white,
+      tabBarShowLabel: false,
+      tabBarStyle: {
         backgroundColor: AppColors.secondary,
       },
-      headerTintColor: AppColors.white,
-      headerTitleAlign: 'center',
-    }}>
-    <Tab.Screen
-      name={routes.HOME}
-      component={HomeScreen}
-      options={{ headerShown: false }}
-    />
-    <Tab.Screen
-      name={routes.SHOW_DETAILS}
-      component={ShowDetailScreen}
-      options={({ route }) => ({ title: route.params.name })}
-    />
-    <Tab.Screen
-      name={routes.EPISODE_DETAILS}
-      component={EpisodeDetailScreen}
-      options={({ route }) => ({
-        title: route.params.episode.name,
-      })}
-    />
+      tabBarActiveBackgroundColor: AppColors.secondaryDark,
+      headerShown: false,
+    })}>
+    <Tab.Screen name={routes.SHOWS_STACK} component={ShowsNavigator} />
+    <Tab.Screen name={routes.SETTINGS_STACK} component={SettingsNavigator} />
   </Tab.Navigator>
 );
 

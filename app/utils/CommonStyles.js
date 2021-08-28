@@ -7,6 +7,7 @@ export const AppColors = {
   noFill: 'transparent',
   primary: '#f3c6bf',
   secondary: '#3f8a89',
+  secondaryDark: '#387b7a',
   accent: '#a56f67',
 };
 
