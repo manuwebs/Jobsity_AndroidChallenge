@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import usePrevious from '../hooks/usePrevious';
 import { AppColors, AppStyles } from '../utils/CommonStyles';
 import Utilities from '../utils/Utilities';
 import AppIcon from './AppIcon';
@@ -21,9 +22,17 @@ export default function ShowsList({
   const imageWidth = Utilities.dimensions.width / numberOfColumns - margin * 2;
 
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const prevShows = usePrevious(shows);
 
   // scrolls to top everytime shows change (on serach, on cancel)
-  useEffect(() => flatList.current?.scrollToOffset(0), [shows]);
+  useEffect(
+    () =>
+      // makes sure that the current shows doesn't contains the previous shows before scrolling
+      shows.filter(s => prevShows.indexOf(s) >= 0).length !== prevShows?.length
+        ? flatList.current?.scrollToOffset(0)
+        : null,
+    [shows],
+  );
 
   let flatList = useRef(null);
 
