@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: AppColors.accent,
     paddingHorizontal: 20,
-    height: 35,
+    paddingVertical: 10,
   },
   label: {
     color: AppColors.white,

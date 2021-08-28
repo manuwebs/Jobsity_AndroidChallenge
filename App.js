@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, { Node, useEffect, useState } from 'react';
 import AppHeader from './app/components/AppHeader';
 import LoadingIndicator from './app/components/LoadingIndicator';
+import { FavoriteProvider } from './app/contexts/FavoriteContext';
 import { LockContext } from './app/contexts/LockContext';
 import AppNavigator from './app/navigation/AppNavigator';
 import LockScreen from './app/screens/Auth/LockScreen';
@@ -29,16 +30,18 @@ const App: () => Node = () => {
 
   return (
     <LockContext.Provider value={{ PIN, setPIN, isLocked, setIsLocked }}>
-      {isLoading ? (
-        <LoadingIndicator />
-      ) : isLocked ? (
-        <LockScreen />
-      ) : (
-        <NavigationContainer>
-          <AppHeader />
-          <AppNavigator />
-        </NavigationContainer>
-      )}
+      <FavoriteProvider>
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : isLocked ? (
+          <LockScreen />
+        ) : (
+          <NavigationContainer>
+            <AppHeader />
+            <AppNavigator />
+          </NavigationContainer>
+        )}
+      </FavoriteProvider>
     </LockContext.Provider>
   );
 };

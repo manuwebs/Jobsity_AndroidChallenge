@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import ShowsAPI from '../../api/ShowsAPI';
 import Accordeon from '../../components/Accordeon';
+import AppButton from '../../components/AppButton';
 import AppHTMLRender from '../../components/AppHTMLRender';
 import AppText from '../../components/AppText';
 import Container from '../../components/Container';
 import ErrorPlaceholder from '../../components/ErrorPlaceholder';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import PosterPlaceholder from '../../components/PosterPlaceholder';
+import { FavoriteContext } from '../../contexts/FavoriteContext';
 import useAPI from '../../hooks/useAPI';
 import routes from '../../navigation/routes';
 import { AppColors, AppStyles } from '../../utils/CommonStyles';
@@ -15,6 +17,7 @@ import Utilities from '../../utils/Utilities';
 
 export default function ShowDetailScreen({ navigation, route }) {
   const { id, image, schedule, genres, summary } = route.params;
+  const { isFavorite, updateFavorites } = useContext(FavoriteContext);
   const {
     data: episodes,
     request: getEpisodesByShowID,
@@ -53,21 +56,32 @@ export default function ShowDetailScreen({ navigation, route }) {
       )}
 
       <View style={[AppStyles.marginVertical, styles.contentContainer]}>
-        <AppText style={[AppStyles.marginHorizontal, AppStyles.textRight]}>
-          <AppText style={AppStyles.bold}>
-            {schedule.days.map(schedule => schedule + "'s")}
-          </AppText>
-          {schedule.time && ' at ' + schedule.time}
-        </AppText>
-
-        {genres?.length > 0 && (
-          <AppText style={[AppStyles.marginHorizontal, AppStyles.textRight]}>
-            <AppText style={AppStyles.bold}>Genres: </AppText>
-            {genres.map(g =>
-              genres.indexOf(g) !== genres.length - 1 ? g + ', ' : g,
+        <View style={{ flexDirection: 'row' }}>
+          <AppButton
+            containerStyles={{ flex: 1 }}
+            title={
+              isFavorite(id) ? 'Remove from favorites' : 'Add to favorites'
+            }
+            onPress={() => updateFavorites(id)}
+          />
+          <View style={{ flex: 2 }}>
+            <AppText style={[AppStyles.marginHorizontal, AppStyles.textRight]}>
+              <AppText style={AppStyles.bold}>
+                {schedule.days.map(schedule => schedule + "'s")}
+              </AppText>
+              {schedule.time && ' at ' + schedule.time}
+            </AppText>
+            {genres?.length > 0 && (
+              <AppText
+                style={[AppStyles.marginHorizontal, AppStyles.textRight]}>
+                <AppText style={AppStyles.bold}>Genres: </AppText>
+                {genres.map(g =>
+                  genres.indexOf(g) !== genres.length - 1 ? g + ', ' : g,
+                )}
+              </AppText>
             )}
-          </AppText>
-        )}
+          </View>
+        </View>
 
         {summary ? (
           <AppHTMLRender html={summary} style={AppStyles.marginHorizontal} />

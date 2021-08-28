@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { FavoriteContext } from '../contexts/FavoriteContext';
 import usePrevious from '../hooks/usePrevious';
 import { AppColors, AppStyles } from '../utils/CommonStyles';
 import Utilities from '../utils/Utilities';
@@ -23,6 +24,7 @@ export default function ShowsList({
 
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const prevShows = usePrevious(shows);
+  const { isFavorite, updateFavorites } = useContext(FavoriteContext);
   let flatList = useRef(null);
 
   // scrolls to top everytime shows change (on serach, on cancel)
@@ -42,6 +44,15 @@ export default function ShowsList({
         width: imageWidth,
         margin: margin,
       }}>
+      {isFavorite(item.id) ? (
+        <AppIcon
+          name={'star'}
+          color={AppColors.gold}
+          size={30}
+          style={styles.favIcon}
+        />
+      ) : null}
+
       {item.image ? (
         <Image
           resizeMode={'contain'}
@@ -123,5 +134,11 @@ const styles = StyleSheet.create({
     zIndex: 1,
     bottom: 10,
     right: 10,
+  },
+  favIcon: {
+    position: 'absolute',
+    top: -13,
+    left: 88,
+    zIndex: 1,
   },
 });
