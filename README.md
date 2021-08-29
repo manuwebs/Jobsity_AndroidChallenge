@@ -30,7 +30,7 @@
 
 ## Dependencies
 
-Dillinger uses a number of open source projects to work properly:
+This app uses a number of open source projects to work properly:
 
 - [React Navigation] - Allow navigation in the app (using Tab and Stack navigation)
 - [Axios] - HTTP client for Node.JS, base client for API requests on the app.
