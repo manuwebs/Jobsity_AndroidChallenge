@@ -8,5 +8,9 @@ export default Object.freeze({
   },
   search: {
     shows: '/search/shows?q=',
+    people: '/search/people?q=',
+  },
+  person: {
+    getById: '/people/:id/castcredits?embed=show',
   },
 });

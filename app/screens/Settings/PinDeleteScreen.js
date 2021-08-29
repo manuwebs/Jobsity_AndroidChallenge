@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginHorizontal: 40,
   },
-  buttonLabel: { fontSize: 18, fontWeight: 'bold' },
+  buttonLabel: { fontSize: 18, fontFamily: 'Ubuntu-Bold' },
   container: {
     justifyContent: 'center',
     paddingTop: 20,

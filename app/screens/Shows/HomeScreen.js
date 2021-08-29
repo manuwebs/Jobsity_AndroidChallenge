@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import SearchAPI from '../../api/SearchAPI';
 import ShowsAPI from '../../api/ShowsAPI';
 import AppText from '../../components/AppText';
 import Container from '../../components/Container';
@@ -38,9 +39,11 @@ export default function HomeScreen({ navigation }) {
       <Container>
         <View style={styles.searchBarContainer}>
           <SearchBar
-            searchResults={setSearchResults}
+            searchResults={res => setSearchResults(res?.map(r => r.show))}
             onLoading={setSearchLoading}
             onError={err => console.log(err)}
+            API={SearchAPI.shows}
+            placeholder={'Ex. The Good Doctor'}
           />
         </View>
         <AppText

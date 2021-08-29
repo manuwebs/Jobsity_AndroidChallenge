@@ -23,7 +23,7 @@ export const AppStyles = StyleSheet.create({
     fontSize: 30,
   },
   mainHeading: {
-    fontWeight: 'bold',
+    fontFamily: 'Ubuntu-Bold',
     borderBottomColor: AppColors.accent,
     borderBottomWidth: 3,
     textDecorationColor: AppColors.accent,
@@ -47,7 +47,7 @@ export const AppStyles = StyleSheet.create({
     textAlign: 'right',
   },
   bold: {
-    fontWeight: 'bold',
+    fontFamily: 'Ubuntu-Bold',
   },
   marginHorizontal: {
     marginHorizontal: margin,

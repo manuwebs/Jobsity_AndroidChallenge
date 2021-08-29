@@ -55,20 +55,18 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 50,
-    marginBottom: 20,
     paddingHorizontal: 30,
-    height: 40,
+    height: 50,
   },
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginHorizontal: 40,
   },
-  buttonLabel: { fontSize: 18, fontWeight: 'bold' },
+  buttonLabel: { fontSize: 18, fontFamily: 'Ubuntu-Bold' },
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: 20,
     backgroundColor: AppColors.secondary,
   },
   errorMessage: {
@@ -76,7 +74,9 @@ const styles = StyleSheet.create({
     color: AppColors.danger,
   },
   logo: {
-    position: 'absolute',
-    bottom: 20,
+    resizeMode: 'contain',
+    width: 200,
+    height: 100,
+    marginTop: 120,
   },
 });

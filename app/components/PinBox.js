@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
   },
-  secondHeading: { marginTop: 20, fontSize: 18, fontWeight: 'bold' },
-  input: { fontSize: 22, fontWeight: 'bold', borderRadius: 50 },
+  secondHeading: { marginTop: 20, fontSize: 18, fontFamily: 'Ubuntu-Bold' },
+  input: { fontSize: 22, fontFamily: 'Ubuntu-Bold', borderRadius: 50 },
   inputContainer: {
     marginTop: 20,
     marginHorizontal: 10,

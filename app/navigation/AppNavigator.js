@@ -3,6 +3,7 @@ import React from 'react';
 import AppIcon from '../components/AppIcon';
 import { AppColors } from '../utils/CommonStyles';
 import FavoritesNavigator from './FavoritesNavigator';
+import PeopleNavigator from './PeopleNavigator';
 import routes from './routes';
 import SettingsNavigator from './SettingsNavigator';
 import ShowsNavigator from './ShowsNavigator';
@@ -28,6 +29,10 @@ const AppNavigator = () => (
           case routes.FAVORITE_STACK:
             iconName = focused ? 'star' : 'star-outline';
             break;
+
+          case routes.PEOPLE_STACK:
+            iconName = focused ? 'account-search' : 'account-search-outline';
+            break;
         }
 
         return <AppIcon name={iconName} size={30} color={color} />;
@@ -43,6 +48,7 @@ const AppNavigator = () => (
     })}>
     <Tab.Screen name={routes.SHOWS_STACK} component={ShowsNavigator} />
     <Tab.Screen name={routes.FAVORITE_STACK} component={FavoritesNavigator} />
+    <Tab.Screen name={routes.PEOPLE_STACK} component={PeopleNavigator} />
     <Tab.Screen name={routes.SETTINGS_STACK} component={SettingsNavigator} />
   </Tab.Navigator>
 );

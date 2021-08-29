@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   itemLabel: {
     color: AppColors.black,
-    fontWeight: 'bold',
+    fontFamily: 'Ubuntu-Bold',
     fontSize: 20,
   },
   list: {

@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+import Poster from '../components/Poster';
 import { FavoriteContext } from '../contexts/FavoriteContext';
 import usePrevious from '../hooks/usePrevious';
-import { AppColors, AppStyles } from '../utils/CommonStyles';
+import { AppColors } from '../utils/CommonStyles';
 import Utilities from '../utils/Utilities';
 import AppIcon from './AppIcon';
 import AppRoundButton from './AppRoundButton';
-import AppText from './AppText';
 import EmptyPlaceholder from './EmptyPlaceholder';
 import LoadingIndicator from './LoadingIndicator';
-import PosterPlaceholder from './PosterPlaceholder';
 
 export default function ShowsList({
   loading = false,
@@ -35,53 +34,6 @@ export default function ShowsList({
         ? flatList.current?.scrollToOffset(0)
         : null,
     [shows],
-  );
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => onShowPress(item)}
-      style={{
-        width: imageWidth,
-        margin: margin,
-      }}>
-      {isFavorite(item) ? (
-        <AppIcon
-          name={'star'}
-          color={AppColors.gold}
-          size={30}
-          style={styles.favIcon}
-        />
-      ) : null}
-
-      {item.image ? (
-        <Image
-          resizeMode={'contain'}
-          style={[
-            {
-              height: imageWidth * Utilities.verticalRatio,
-            },
-            AppStyles.borderRadius,
-          ]}
-          source={{ uri: item.image.medium }}
-        />
-      ) : (
-        <PosterPlaceholder
-          size={50}
-          dark
-          style={[
-            {
-              height: imageWidth * Utilities.verticalRatio,
-            },
-            AppStyles.borderRadius,
-            AppStyles.alignCenter,
-          ]}
-        />
-      )}
-
-      <AppText numberOfLines={3} style={[AppStyles.textCenter, styles.label]}>
-        {item.name}
-      </AppText>
-    </TouchableOpacity>
   );
 
   return (
@@ -120,7 +72,14 @@ export default function ShowsList({
             : setShowScrollToTop(false)
         }
         onEndReached={onEndReached}
-        renderItem={renderItem}
+        renderItem={({ item }) => (
+          <Poster
+            item={item}
+            margin={margin}
+            onPress={() => onShowPress(item)}
+            imageWidth={imageWidth}
+          />
+        )}
         ListFooterComponent={() => loading && <LoadingIndicator />}
         numColumns={numberOfColumns}
       />
@@ -129,20 +88,10 @@ export default function ShowsList({
 }
 
 const styles = StyleSheet.create({
-  label: {
-    fontSize: 18,
-    fontWeight: '500',
-  },
   floatingButton: {
     position: 'absolute',
     zIndex: 1,
     bottom: 10,
     right: 10,
-  },
-  favIcon: {
-    position: 'absolute',
-    top: -13,
-    left: 88,
-    zIndex: 1,
   },
 });

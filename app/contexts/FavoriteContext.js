@@ -33,7 +33,7 @@ export const FavoriteProvider = ({ children }) => {
   };
 
   const isFavorite = item => {
-    return favorites.find(f => f.id === item.id);
+    return favorites?.find(f => f.id === item.id);
   };
 
   const clearFavorites = () => setFavorites([]);

@@ -32,6 +32,7 @@ export default function AppInput({
 const styles = StyleSheet.create({
   textInput: {
     backgroundColor: AppColors.gray,
+    fontFamily: 'Ubuntu-Light',
     paddingHorizontal: 10,
     paddingVertical: 5,
     flex: 1,

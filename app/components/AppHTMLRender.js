@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import RenderHTML from 'react-native-render-html';
-import { AppStyles } from '../utils/CommonStyles';
+import { AppColors, AppStyles } from '../utils/CommonStyles';
 import Utilities from '../utils/Utilities';
 
 export default function AppHTMLRender({
@@ -10,8 +10,18 @@ export default function AppHTMLRender({
 }) {
   const tagsStyles = useMemo(
     () => ({
-      p: { textAlign: textAligment },
-      b: { fontWeight: 'bold' },
+      body: {
+        fontFamily: 'Ubuntu-Light',
+        whiteSpace: 'normal',
+        color: AppColors.black,
+      },
+      p: {
+        fontFamily: 'Ubuntu-Light',
+        textAlign: textAligment,
+      },
+      b: {
+        fontFamily: 'Ubuntu-Bold',
+      },
     }),
     [textAligment],
   );
@@ -21,12 +31,17 @@ export default function AppHTMLRender({
     [style],
   );
 
+  const systemFonts = useMemo(() => {
+    ['Ubuntu-Light', 'Ubuntu-Bold'];
+  }, []);
+
   return (
     <RenderHTML
       source={{ html }}
       baseStyle={baseStyle}
       tagsStyles={tagsStyles}
       contentWidth={Utilities.dimensions.width}
+      systemFonts={systemFonts}
     />
   );
 }

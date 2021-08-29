@@ -4,13 +4,22 @@ import { AppColors } from '../utils/CommonStyles';
 import AppIcon from './AppIcon';
 import AppText from './AppText';
 
-export default function PosterPlaceholder({ style, size, dark = false }) {
+export default function PosterPlaceholder({
+  style,
+  size,
+  dark = false,
+  icon,
+  message,
+}) {
   return (
-    <View style={[styles.container, dark ? styles.background : null, style]}>
-      <AppIcon name={'television-classic-off'} size={size} />
-      <AppText style={styles.noImageText}>
-        Poster not available at the time
-      </AppText>
+    <View
+      style={[
+        styles.container,
+        dark ? styles.background : { backgroundColor: AppColors.black },
+        style,
+      ]}>
+      <AppIcon name={icon} size={size} />
+      <AppText style={styles.noImageText}>{message}</AppText>
     </View>
   );
 }

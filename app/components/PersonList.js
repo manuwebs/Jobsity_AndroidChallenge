@@ -1,39 +1,70 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import { FavoriteContext } from '../contexts/FavoriteContext';
-import usePrevious from '../hooks/usePrevious';
-import { AppColors } from '../utils/CommonStyles';
+import React, { useEffect, useRef, useState } from 'react';
+import { FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { AppColors, AppStyles } from '../utils/CommonStyles';
 import Utilities from '../utils/Utilities';
 import AppIcon from './AppIcon';
 import AppRoundButton from './AppRoundButton';
+import AppText from './AppText';
 import EmptyPlaceholder from './EmptyPlaceholder';
 import LoadingIndicator from './LoadingIndicator';
-import Poster from './Poster';
+import PosterPlaceholder from './PosterPlaceholder';
 
-export default function AlphabeticalShowList({
+export default function PersonList({
   loading = false,
   numberOfColumns = 3,
   margin = 10,
   onEndReached,
   onShowPress,
-  shows,
+  data,
 }) {
   // margin * 2 because margin applies on sides
   const imageWidth = Utilities.dimensions.width / numberOfColumns - margin * 2;
 
   const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const prevShows = usePrevious(shows);
-  const { isFavorite, updateFavorites } = useContext(FavoriteContext);
   let flatList = useRef(null);
 
   // scrolls to top everytime shows change (on serach, on cancel)
-  useEffect(
-    () =>
-      // makes sure that the current shows doesn't contains the previous shows before scrolling
-      shows.filter(s => prevShows?.indexOf(s) >= 0).length !== prevShows?.length
-        ? flatList.current?.scrollToOffset(0)
-        : null,
-    [shows],
+  useEffect(() => flatList?.current?.scrollToOffset(0), [data]);
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => onShowPress(item)}
+      style={{
+        width: imageWidth,
+        margin: margin,
+      }}>
+      {item.image ? (
+        <Image
+          resizeMode={'cover'}
+          style={[
+            {
+              borderRadius: imageWidth / 2,
+              height: imageWidth,
+            },
+            styles.image,
+          ]}
+          source={{ uri: item.image.medium }}
+        />
+      ) : (
+        <PosterPlaceholder
+          size={35}
+          icon={'account-off-outline'}
+          message={'Picture not available'}
+          style={[
+            {
+              borderRadius: imageWidth / 2,
+              height: imageWidth,
+            },
+            styles.image,
+            AppStyles.alignCenter,
+          ]}
+        />
+      )}
+
+      <AppText numberOfLines={3} style={[AppStyles.textCenter, styles.label]}>
+        {item.name}
+      </AppText>
+    </TouchableOpacity>
   );
 
   return (
@@ -47,7 +78,7 @@ export default function AlphabeticalShowList({
               color={AppColors.white}
             />
           }
-          onPress={() => flatList.current?.scrollToOffset(0)}
+          onPress={() => flatList?.current?.scrollToOffset(0)}
           size={40}
           containerStyles={styles.floatingButton}
         />
@@ -56,7 +87,7 @@ export default function AlphabeticalShowList({
         ref={flatList}
         persistentScrollbar
         contentContainerStyle={{ flexGrow: 1 }}
-        data={shows}
+        data={data}
         keyExtractor={item => item.id}
         ListEmptyComponent={() =>
           !loading && (
@@ -72,15 +103,8 @@ export default function AlphabeticalShowList({
             : setShowScrollToTop(false)
         }
         onEndReached={onEndReached}
-        renderItem={({ item }) => (
-          <Poster
-            item={item}
-            margin={margin}
-            onPress={() => onShowPress(item)}
-            imageWidth={imageWidth}
-          />
-        )}
-        ListFooterComponent={() => loading && <LoadingIndicator />}
+        renderItem={renderItem}
+        ListHeaderComponent={() => (loading ? <LoadingIndicator /> : null)}
         numColumns={numberOfColumns}
       />
     </>

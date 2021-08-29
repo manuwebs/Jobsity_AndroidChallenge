@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import SearchAPI from '../api/SearchAPI';
 import useAPI from '../hooks/useAPI';
 import useDebounce from '../hooks/useDebounce';
 import AppButton from './AppButton';
 import AppInput from './AppInput';
 
-export default function SearchBar({ searchResults, onError, onLoading }) {
+export default function SearchBar({
+  searchResults,
+  onError,
+  onLoading,
+  API,
+  placeholder,
+}) {
   const [searchCriteria, setSearchCriteria] = useState('');
   // using useDebounce allows to wait for the user to finish typing the criteria
   const searchDebounced = useDebounce(searchCriteria, 500);
-  const {
-    data,
-    setData,
-    error,
-    loading,
-    request: searchShows,
-  } = useAPI(SearchAPI.shows);
+  const { data, setData, error, loading, request: searchShows } = useAPI(API);
 
   const handleSearch = text => {
     setSearchCriteria(text);
@@ -38,7 +37,7 @@ export default function SearchBar({ searchResults, onError, onLoading }) {
 
   // sends the fetched data to parent component
   useEffect(() => {
-    searchResults(data ? data.map(d => d.show) : null);
+    searchResults(data);
   }, [data]);
 
   // if an error is thrown, sends it to parent component
@@ -58,7 +57,7 @@ export default function SearchBar({ searchResults, onError, onLoading }) {
         containerStyle={styles.textInputContainer}
         value={searchCriteria}
         onChangeText={handleSearch}
-        placeholder="Ex. The Good Doctor"
+        placeholder={placeholder}
       />
       {searchDebounced !== '' && (
         <AppButton

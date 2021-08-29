@@ -13,5 +13,6 @@ export default function AppText({ children, style, numberOfLines }) {
 const styles = StyleSheet.create({
   text: {
     color: AppColors.black,
+    fontFamily: 'Ubuntu-Light',
   },
 });

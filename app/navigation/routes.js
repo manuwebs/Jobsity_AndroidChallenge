@@ -6,8 +6,11 @@ export default Object.freeze({
   SHOWS_STACK: 'ShowsStack',
   SETTINGS_STACK: 'SettingsStack',
   FAVORITE_STACK: 'FavoritesStack',
+  PEOPLE_STACK: 'PeopleStack',
   FAVORITE: 'Favorites',
   SETTINGS: 'Settings',
   PIN_SET: 'PinSet',
   PIN_DELETE: 'PinDelete',
+  PEOPLE_SEARCH: 'PeopleSearch',
+  PERSON_DETAILS: 'PersonDetails',
 });

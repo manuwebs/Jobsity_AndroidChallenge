@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   title: {
-    fontWeight: 'bold',
+    fontFamily: 'Ubuntu-Bold',
     fontSize: 16,
     color: AppColors.white,
   },
