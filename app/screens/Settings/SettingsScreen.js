@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import AppIcon from '../../components/AppIcon';
 import AppText from '../../components/AppText';
 import Container from '../../components/Container';
+import { YesNoAlert } from '../../components/YesNoAlert';
 import { FavoriteContext } from '../../contexts/FavoriteContext';
 import { LockContext } from '../../contexts/LockContext';
 import routes from '../../navigation/routes';
@@ -16,7 +17,12 @@ export default function SettingsScreen({ navigation }) {
     {
       icon: 'star-off',
       name: 'Reset favorites',
-      func: () => clearFavorites(),
+      func: () =>
+        YesNoAlert(
+          'Confirm Deletion',
+          'Are you sure you want to clean your favorites list?',
+          clearFavorites,
+        ),
       disabled: favorites.length === 0,
     },
     {
