@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import AppIcon from '../components/AppIcon';
 import { AppColors } from '../utils/CommonStyles';
+import FavoritesNavigator from './FavoritesNavigator';
 import routes from './routes';
 import SettingsNavigator from './SettingsNavigator';
 import ShowsNavigator from './ShowsNavigator';
@@ -23,6 +24,10 @@ const AppNavigator = () => (
           case routes.SETTINGS_STACK:
             iconName = focused ? 'cog' : 'cog-outline';
             break;
+
+          case routes.FAVORITE_STACK:
+            iconName = focused ? 'star' : 'star-outline';
+            break;
         }
 
         return <AppIcon name={iconName} size={30} color={color} />;
@@ -37,6 +42,7 @@ const AppNavigator = () => (
       headerShown: false,
     })}>
     <Tab.Screen name={routes.SHOWS_STACK} component={ShowsNavigator} />
+    <Tab.Screen name={routes.FAVORITE_STACK} component={FavoritesNavigator} />
     <Tab.Screen name={routes.SETTINGS_STACK} component={SettingsNavigator} />
   </Tab.Navigator>
 );

@@ -5,6 +5,8 @@ export default Object.freeze({
   EPISODE_DETAILS: 'EpisodeDetails',
   SHOWS_STACK: 'ShowsStack',
   SETTINGS_STACK: 'SettingsStack',
+  FAVORITE_STACK: 'FavoritesStack',
+  FAVORITE: 'Favorites',
   SETTINGS: 'Settings',
   PIN_SET: 'PinSet',
   PIN_DELETE: 'PinDelete',
