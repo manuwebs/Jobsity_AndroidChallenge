@@ -56,18 +56,20 @@ export default function ShowDetailScreen({ navigation, route }) {
       )}
 
       <View style={[AppStyles.marginVertical, styles.contentContainer]}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={AppStyles.row}>
           <AppButton
             containerStyles={{ flex: 1 }}
             title={
-              isFavorite(id) ? 'Remove from favorites' : 'Add to favorites'
+              isFavorite(route.params)
+                ? 'Remove from favorites'
+                : 'Add to favorites'
             }
-            onPress={() => updateFavorites(id)}
+            onPress={() => updateFavorites(route.params)}
           />
           <View style={{ flex: 2 }}>
             <AppText style={[AppStyles.marginHorizontal, AppStyles.textRight]}>
               <AppText style={AppStyles.bold}>
-                {schedule.days.map(schedule => schedule + "'s")}
+                {schedule.days.map(s => s + "'s")}
               </AppText>
               {schedule.time && ' at ' + schedule.time}
             </AppText>

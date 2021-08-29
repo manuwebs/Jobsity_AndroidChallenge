@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import RenderHTML from 'react-native-render-html';
+import { AppStyles } from '../utils/CommonStyles';
 import Utilities from '../utils/Utilities';
 
 export default function AppHTMLRender({
@@ -15,10 +16,15 @@ export default function AppHTMLRender({
     [textAligment],
   );
 
+  const baseStyle = useMemo(
+    () => ({ ...AppStyles.marginVertical, ...style }),
+    [style],
+  );
+
   return (
     <RenderHTML
       source={{ html }}
-      baseStyle={style}
+      baseStyle={baseStyle}
       tagsStyles={tagsStyles}
       contentWidth={Utilities.dimensions.width}
     />

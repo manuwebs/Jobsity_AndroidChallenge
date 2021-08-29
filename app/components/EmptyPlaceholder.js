@@ -4,7 +4,7 @@ import AppText from '../components/AppText';
 import { AppStyles } from '../utils/CommonStyles';
 import utilities from '../utils/Utilities';
 
-export default function EmptyPlaceholder() {
+export default function EmptyPlaceholder({ message }) {
   return (
     <View style={styles.container}>
       <Image
@@ -12,9 +12,7 @@ export default function EmptyPlaceholder() {
         resizeMode={'contain'}
         source={require('../assets/images/not-found.png')}
       />
-      <AppText style={[AppStyles.textCenter, styles.text]}>
-        Ups!, We have not found anything with your search term
-      </AppText>
+      <AppText style={[AppStyles.textCenter, styles.text]}>{message}</AppText>
     </View>
   );
 }

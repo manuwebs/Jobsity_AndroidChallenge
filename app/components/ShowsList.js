@@ -12,7 +12,7 @@ import LoadingIndicator from './LoadingIndicator';
 import PosterPlaceholder from './PosterPlaceholder';
 
 export default function ShowsList({
-  loading,
+  loading = false,
   numberOfColumns = 3,
   margin = 10,
   onEndReached,
@@ -44,7 +44,7 @@ export default function ShowsList({
         width: imageWidth,
         margin: margin,
       }}>
-      {isFavorite(item.id) ? (
+      {isFavorite(item) ? (
         <AppIcon
           name={'star'}
           color={AppColors.gold}
@@ -106,7 +106,11 @@ export default function ShowsList({
         contentContainerStyle={{ flexGrow: 1 }}
         data={shows}
         keyExtractor={item => item.id}
-        ListEmptyComponent={() => !loading && <EmptyPlaceholder />}
+        ListEmptyComponent={() =>
+          !loading && (
+            <EmptyPlaceholder message="Ups!, We have not found anything with your search term" />
+          )
+        }
         onScroll={({ nativeEvent }) =>
           // if y scroll is greather than 10 px then show floating button
           nativeEvent.contentOffset.y > 10

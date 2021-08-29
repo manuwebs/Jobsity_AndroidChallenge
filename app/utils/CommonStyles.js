@@ -70,4 +70,7 @@ export const AppStyles = StyleSheet.create({
   margin: {
     margin: margin,
   },
+  row: {
+    flexDirection: 'row',
+  },
 });
