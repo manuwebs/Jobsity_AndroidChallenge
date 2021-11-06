@@ -8,7 +8,6 @@ import ErrorPlaceholder from '../../components/ErrorPlaceholder';
 import SearchBar from '../../components/SearchBar';
 import ShowsList from '../../components/ShowsList';
 import useAPI from '../../hooks/useAPI';
-import routes from '../../navigation/routes';
 import { AppColors, AppStyles } from '../../utils/CommonStyles';
 
 export default function HomeScreen({ navigation }) {
@@ -21,11 +20,11 @@ export default function HomeScreen({ navigation }) {
   // fetch shows everytime page number changes
   useEffect(() => {
     getShows(page);
-  }, [page]);
+  }, [page, getShows]);
 
   // updating shows variable everytime data is fetched
   useEffect(() => {
-    if (data) setShows([...shows, ...data]);
+    if (data) setShows(_shows => [..._shows, ...data]);
   }, [data]);
 
   if (!data && error) {
@@ -57,7 +56,6 @@ export default function HomeScreen({ navigation }) {
         <ShowsList
           shows={searchResults ?? shows}
           onEndReached={() => (!searchResults ? setPage(page + 1) : null)}
-          onShowPress={item => navigation.navigate(routes.SHOW_DETAILS, item)}
           loading={loading || searchLoading}
         />
       </Container>
