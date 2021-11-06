@@ -23,7 +23,6 @@ function AppList(
       bottom: 10,
       left: null,
     },
-    viewabilityConfigCallbackPairs,
     ...props
   },
   ref,
@@ -75,7 +74,6 @@ function AppList(
         ListFooterComponent={() => (loading ? <LoadingIndicator /> : null)}
         numColumns={numberOfColumns}
         contentContainerStyle={contentContainerStyle}
-        viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs}
         {...props}
       />
     </>

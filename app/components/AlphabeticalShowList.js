@@ -1,107 +1,121 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import { FavoriteContext } from '../contexts/FavoriteContext';
-import usePrevious from '../hooks/usePrevious';
-import { AppColors } from '../utils/CommonStyles';
-import Utilities from '../utils/Utilities';
-import AppIcon from './AppIcon';
-import AppRoundButton from './AppRoundButton';
+import React, { useMemo, useRef, useState } from 'react';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { AppColors, AppStyles } from '../utils/CommonStyles';
+import AppList from './AppList';
+import AppText from './AppText';
 import EmptyPlaceholder from './EmptyPlaceholder';
-import LoadingIndicator from './LoadingIndicator';
 import Poster from './Poster';
 
-export default function AlphabeticalShowList({
-  loading = false,
-  numberOfColumns = 3,
-  margin = 10,
-  onEndReached,
-  onShowPress,
-  shows,
-}) {
-  // margin * 2 because margin applies on sides
-  const imageWidth = Utilities.dimensions.width / numberOfColumns - margin * 2;
+export default function AlphabeticalShowList({ loading = false, shows }) {
+  const [sectionActiveIndex, setSectionActiveIndex] = useState([]);
 
-  const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const prevShows = usePrevious(shows);
-  const { isFavorite, updateFavorites } = useContext(FavoriteContext);
-  let flatList = useRef(null);
+  const flatList = useRef();
 
-  // scrolls to top everytime shows change (on serach, on cancel)
-  useEffect(
-    () =>
-      // makes sure that the current shows doesn't contains the previous shows before scrolling
-      shows.filter(s => prevShows?.indexOf(s) >= 0).length !== prevShows?.length
-        ? flatList.current?.scrollToOffset(0)
-        : null,
-    [shows],
-  );
+  // obtaining existing distinct first letters shows name[0]
+  const sections = useMemo(() => {
+    var seen = {};
+    return shows
+      .map(s => s.name[0])
+      .filter(item => (seen.hasOwnProperty(item) ? false : (seen[item] = true)))
+      .sort()
+      .map(s => {
+        return {
+          title: s,
+          shows: shows.filter(show => show.name.startsWith(s)),
+        };
+      });
+  }, [shows]);
 
   return (
-    <>
-      {showScrollToTop && (
-        <AppRoundButton
-          title={
-            <AppIcon
-              name={'arrow-up-thick'}
-              size={20}
-              color={AppColors.white}
-            />
-          }
-          onPress={() => flatList.current?.scrollToOffset(0)}
-          size={40}
-          containerStyles={styles.floatingButton}
-        />
-      )}
-      <FlatList
+    <View style={styles.mainContainer}>
+      <AppList
         ref={flatList}
-        persistentScrollbar
-        contentContainerStyle={{ flexGrow: 1 }}
-        data={shows}
-        keyExtractor={item => item.id}
-        ListEmptyComponent={() =>
-          !loading && (
-            <EmptyPlaceholder message="Ups!, We have not found anything with your search term" />
-          )
-        }
-        onScroll={({ nativeEvent }) =>
-          // if y scroll is greather than 10 px then show floating button
-          nativeEvent.contentOffset.y > 10
-            ? !showScrollToTop
-              ? setShowScrollToTop(true)
-              : null
-            : setShowScrollToTop(false)
-        }
-        onEndReached={onEndReached}
+        scrollToTopIndicatorPosition={{ right: 35, bottom: 10 }}
+        data={sections}
+        keyExtractor={item => item.title}
         renderItem={({ item }) => (
-          <Poster
-            item={item}
-            margin={margin}
-            onPress={() => onShowPress(item)}
-            imageWidth={imageWidth}
-          />
+          <>
+            <AppText style={[AppStyles.marginHorizontal, styles.header]}>
+              {item.title}
+            </AppText>
+            <FlatList
+              fadingEdgeLength={25}
+              horizontal
+              data={item.shows}
+              keyExtractor={itm => itm.id}
+              ListEmptyComponent={() => (
+                <EmptyPlaceholder message="Ups!, We have not found anything with your search term" />
+              )}
+              renderItem={({ item: show }) => (
+                <Poster item={show} margin={10} imageWidth={130} />
+              )}
+            />
+          </>
         )}
-        ListFooterComponent={() => loading && <LoadingIndicator />}
-        numColumns={numberOfColumns}
       />
-    </>
+      <RenderNavigationLetter
+        sections={sections}
+        sectionActiveIndex={sectionActiveIndex}
+        onPress={(_, index) => flatList.current?.scrollToIndex({ index })}
+      />
+    </View>
   );
 }
 
+const RenderNavigationLetter = ({ sections, onPress, sectionActiveIndex }) => {
+  return (
+    <AppList
+      fadingEdgeLength={250}
+      style={styles.navigationLettersMainContainer}
+      data={sections}
+      contentContainerStyle={styles.navigationLettersContainer}
+      showScrollToTopIndicator={false}
+      renderItem={({ item, index }) => (
+        <TouchableOpacity
+          onPress={() => onPress(item, index)}
+          style={styles.letterContainer}>
+          <AppText
+            style={[
+              AppStyles.marginHorizontal,
+              styles.navigationLetters,
+              sectionActiveIndex.includes(index)
+                ? styles.activeNavigationLetter
+                : null,
+            ]}>
+            {item.title}
+          </AppText>
+        </TouchableOpacity>
+      )}
+    />
+  );
+};
+
 const styles = StyleSheet.create({
-  label: {
+  header: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: AppColors.accent,
+  },
+  activeNavigationLetter: {
     fontSize: 18,
-    fontFamily: 'Ubuntu-Bold',
+    fontWeight: 'bold',
+    color: AppColors.primary,
   },
-  floatingButton: {
-    position: 'absolute',
-    zIndex: 1,
-    bottom: 10,
-    right: 10,
+  letterContainer: {
+    width: '100%',
+    paddingVertical: 10,
   },
-  favIcon: {
-    position: 'absolute',
-    top: -13,
-    left: 88,
-    zIndex: 1,
+  mainContainer: { flex: 1, flexDirection: 'row' },
+  navigationLetters: {
+    fontSize: 14,
+    color: AppColors.secondary,
+  },
+  navigationLettersContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexGrow: 1,
+  },
+  navigationLettersMainContainer: {
+    width: 40,
   },
 });
