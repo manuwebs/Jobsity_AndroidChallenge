@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import AlphabeticalShowList from '../../components/AlphabeticalShowList';
 import AppText from '../../components/AppText';
@@ -10,13 +10,8 @@ import { AppStyles } from '../../utils/CommonStyles';
 
 export default function FavoriteScreen({ navigation }) {
   const { favorites } = useContext(FavoriteContext);
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    setData(favorites);
-  }, [favorites]);
-
-  if (data.length < 1) {
+  if (favorites.length < 1) {
     return (
       <Container>
         <AppText
@@ -46,7 +41,7 @@ export default function FavoriteScreen({ navigation }) {
           Favorites
         </AppText>
         <AlphabeticalShowList
-          shows={data}
+          shows={favorites}
           onShowPress={item => navigation.navigate(routes.SHOW_DETAILS, item)}
         />
       </Container>
