@@ -34,7 +34,7 @@ export default function ShowDetailScreen({ navigation, route }) {
   useEffect(() => {
     getSeasonsByShowID(id);
     getEpisodesByShowID(id);
-  }, []);
+  }, [id, getSeasonsByShowID, getEpisodesByShowID]);
 
   return (
     <Container

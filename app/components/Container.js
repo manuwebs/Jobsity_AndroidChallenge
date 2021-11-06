@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-  Keyboard,
   RefreshControl,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { AppColors } from '../utils/CommonStyles';
@@ -38,9 +36,7 @@ export default function Container({
           {children}
         </ScrollView>
       ) : (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <View style={[styles.innerContainer, style]}>{children}</View>
-        </TouchableWithoutFeedback>
+        <View style={[styles.innerContainer, style]}>{children}</View>
       )}
     </SafeAreaView>
   );

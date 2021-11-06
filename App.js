@@ -17,7 +17,6 @@ const App: () => Node = () => {
     const getUserPIN = async () => {
       const pin = await SecureStorage.get('pin');
       setIsLoading(false);
-      console.log(pin);
       if (pin) {
         setIsLocked(true);
         setPIN(pin);
