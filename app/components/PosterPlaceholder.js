@@ -8,8 +8,8 @@ export default function PosterPlaceholder({
   style,
   size,
   dark = false,
-  icon,
-  message,
+  icon = 'television-classic-off',
+  message = 'Poster not available at the time',
 }) {
   return (
     <View

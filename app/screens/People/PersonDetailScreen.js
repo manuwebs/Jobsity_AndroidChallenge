@@ -48,7 +48,13 @@ export default function PersonDetailScreen({ navigation, route }) {
           resizeMode={'contain'}
         />
       ) : (
-        <PosterPlaceholder style={styles.image} size={100} />
+        <PosterPlaceholder
+          icon={'account-off-outline'}
+          message={'Picture not available'}
+          style={styles.image}
+          size={100}
+          me
+        />
       )}
 
       <View style={[AppStyles.marginVertical, styles.contentContainer]}>
