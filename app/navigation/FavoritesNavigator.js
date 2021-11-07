@@ -3,7 +3,7 @@ import React from 'react';
 import FavoriteScreen from '../screens/favorites/FavoriteScreen';
 import EpisodeDetailScreen from '../screens/Shows/EpisodeDetailScreen';
 import ShowDetailScreen from '../screens/Shows/ShowDetailScreen';
-import { AppColors } from '../utils/CommonStyles';
+import { StackDefaultOptions } from '../utils/CommonStyles';
 import routes from './routes';
 
 const Stack = createNativeStackNavigator();
@@ -11,13 +11,7 @@ const Stack = createNativeStackNavigator();
 const FavoritesNavigator = () => (
   <Stack.Navigator
     initialRouteName={routes.SETTINGS}
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: AppColors.secondary,
-      },
-      headerTintColor: AppColors.white,
-      headerTitleAlign: 'center',
-    }}>
+    screenOptions={StackDefaultOptions}>
     <Stack.Screen
       options={{ headerShown: false }}
       name={routes.FAVORITE}

@@ -74,3 +74,19 @@ export const AppStyles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+export const StackDefaultOptions = {
+  headerTitleStyle: {
+    fontSize: 18,
+  },
+  headerBackTitleStyle: {
+    fontSize: 14,
+    color: 'red',
+  },
+  headerStyle: {
+    backgroundColor: AppColors.secondary,
+    fontSize: 8,
+  },
+  headerTintColor: AppColors.white,
+  headerTitleAlign: 'center',
+};

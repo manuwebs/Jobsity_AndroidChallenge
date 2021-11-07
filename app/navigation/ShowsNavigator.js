@@ -3,7 +3,7 @@ import React from 'react';
 import EpisodeDetailScreen from '../screens/Shows/EpisodeDetailScreen';
 import HomeScreen from '../screens/Shows/HomeScreen';
 import ShowDetailScreen from '../screens/Shows/ShowDetailScreen';
-import { AppColors } from '../utils/CommonStyles';
+import { StackDefaultOptions } from '../utils/CommonStyles';
 import routes from './routes';
 
 const Stack = createNativeStackNavigator();
@@ -11,16 +11,7 @@ const Stack = createNativeStackNavigator();
 const ShowsNavigator = () => (
   <Stack.Navigator
     initialRouteName={routes.HOME}
-    screenOptions={{
-      headerTitleStyle: {
-        fontSize: 25,
-      },
-      headerStyle: {
-        backgroundColor: AppColors.secondary,
-      },
-      headerTintColor: AppColors.white,
-      headerTitleAlign: 'center',
-    }}>
+    screenOptions={StackDefaultOptions}>
     <Stack.Screen
       name={routes.HOME}
       component={HomeScreen}
