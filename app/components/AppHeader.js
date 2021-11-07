@@ -1,28 +1,33 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 import { AppColors, AppStyles } from '../utils/CommonStyles';
 
 export default function AppHeader() {
   return (
-    <View style={styles.container}>
-      <Image
-        style={[AppStyles.alignCenter, styles.logo]}
-        source={require('../assets/images/logo.png')}
-      />
-    </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.container}>
+        <Image
+          style={[AppStyles.alignCenter, styles.logo]}
+          source={require('../assets/images/logo.png')}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    paddingVertical: 10,
-    borderBottomColor: AppColors.black + '80',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomColor: AppColors.gray + '40',
     borderBottomWidth: 0.5,
-    backgroundColor: AppColors.secondary,
   },
   logo: {
     resizeMode: 'contain',
     height: 25,
+  },
+  mainContainer: {
+    backgroundColor: AppColors.secondary,
   },
 });

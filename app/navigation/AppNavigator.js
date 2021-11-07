@@ -35,7 +35,7 @@ const AppNavigator = () => (
             break;
         }
 
-        return <AppIcon name={iconName} size={30} color={color} />;
+        return <AppIcon name={iconName} size={35} color={color} />;
       },
       tabBarActiveTintColor: AppColors.white,
       tabBarInactiveTintColor: AppColors.white,
