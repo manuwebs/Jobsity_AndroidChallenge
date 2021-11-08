@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Alert } from 'react-native';
 
 const useAPI = apiCall => {
-  const [data, setData] = useState(null);
+  const data = useRef(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -12,7 +12,7 @@ const useAPI = apiCall => {
         try {
           setLoading(true);
           const response = await apiCall(...params);
-          setData(response.data);
+          data.current = response.data;
           setLoading(false);
         } catch (err) {
           if (!err.response) {
@@ -21,7 +21,7 @@ const useAPI = apiCall => {
               'Please check your internet conection and try again!',
             );
           }
-          setData(null);
+          data.current = null;
           setLoading(false);
           setError(true);
         }
@@ -29,7 +29,7 @@ const useAPI = apiCall => {
     [apiCall],
   );
 
-  return { request, data, error, loading, setData };
+  return { request, data: data.current, error, loading };
 };
 
 export default useAPI;

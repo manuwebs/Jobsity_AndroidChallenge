@@ -24,12 +24,17 @@ export default function HomeScreen({ navigation }) {
 
   // updating shows variable everytime data is fetched
   useEffect(() => {
-    if (data) setShows(_shows => [..._shows, ...data]);
+    if (page === 0) {
+      setShows([]);
+    }
+    if (data) {
+      setShows(_shows => [..._shows, ...data]);
+    }
   }, [data]);
 
-  if (!data && error) {
+  if (error) {
     return (
-      <Container scrollable onRefresh={() => getShows(0)} refreshing={loading}>
+      <Container scrollable onRefresh={() => setPage(0)} refreshing={loading}>
         <ErrorPlaceholder message={'Error fetching data'} />
       </Container>
     );
@@ -55,7 +60,9 @@ export default function HomeScreen({ navigation }) {
         </AppText>
         <ShowsList
           shows={searchResults ?? shows}
-          onEndReached={() => (!searchResults ? setPage(page + 1) : null)}
+          onEndReached={() =>
+            !searchResults && !loading ? setPage(page + 1) : null
+          }
           loading={loading || searchLoading}
         />
       </Container>

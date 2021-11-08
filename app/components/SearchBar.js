@@ -15,7 +15,7 @@ export default function SearchBar({
   const [searchCriteria, setSearchCriteria] = useState('');
   // using useDebounce allows to wait for the user to finish typing the criteria
   const searchDebounced = useDebounce(searchCriteria, 500);
-  const { data, setData, error, loading, request: searchShows } = useAPI(API);
+  const { data, error, loading, request: searchShows } = useAPI(API);
 
   const handleSearch = text => {
     setSearchCriteria(text);
@@ -23,15 +23,15 @@ export default function SearchBar({
 
   const handleCancel = () => {
     setSearchCriteria('');
-    setData(null);
+    searchResults(null);
   };
 
   // if there is a criteria, tries to search otherwise set default values
   useEffect(() => {
-    if (searchCriteria) {
-      searchShows(searchCriteria);
+    if (searchDebounced) {
+      searchShows(searchDebounced);
     } else {
-      setData(null);
+      searchResults(null);
     }
   }, [searchDebounced]);
 
@@ -42,7 +42,9 @@ export default function SearchBar({
 
   // if an error is thrown, sends it to parent component
   useEffect(() => {
-    onError(error);
+    if (error) {
+      onError(error);
+    }
   }, [error]);
 
   // if request is loading, sends it to parent component
