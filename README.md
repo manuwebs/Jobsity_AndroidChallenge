@@ -1,32 +1,35 @@
 # Jobsity - Android Challenge
+
 ## TV Series app (TV Maze api)
 
-
 ## Features
+
 - List all of the series contained in the API using the provided pagination (infinite scroll).
 - Allow users to search series by name.
 - Show series details:
-    - Name
-    - Poster (placeholder in case there is none)
-    - Days and time during which the series airs
-    - Genres
-    - Summary
-    - List of episodes separated by season
+  - Name
+  - Poster (placeholder in case there is none)
+  - Days and time during which the series airs
+  - Genres
+  - Summary
+  - List of episodes separated by season
 - Show episodes details:
-    - Name
-    - Number
-    - Season
-    - Summary
-    - Image, (placeholder in case there is none)
+  - Name
+  - Number
+  - Season
+  - Summary
+  - Image, (placeholder in case there is none)
 - Allow the user to set a PIN number to secure the application (need to press each field separatelly).
 - Allow the user to save a series as a favorite.
 - Allow the user to delete a series from the favorites list.
 - Create a people search by listing the name and image of the person.
 - Show person info:
-    - Name
-    - Image
-    - Series they have participated in, with a link to the series details.
+  - Name
+  - Image
+  - Series they have participated in, with a link to the series details.
 - On infinite list show button to scroll to top.
+- Allow the user to browse their favorite series in alphabetical order, and click on one to
+  see its details.
 
 ## Dependencies
 
@@ -49,8 +52,8 @@ npm i
 npm run android
 ```
 
-   [React Navigation]: <https://reactnavigation.org/>
-   [Axios]: <https://github.com/axios/axios/>
-   [React Native Encrypted Storage]: <https://github.com/emeraldsanto/react-native-encrypted-storage/>
-   [React Native Render HTML]: <https://meliorence.github.io/react-native-render-html/>
-   [React Native Vector Icons]: <https://github.com/oblador/react-native-vector-icons/>
+[react navigation]: https://reactnavigation.org/
+[axios]: https://github.com/axios/axios/
+[react native encrypted storage]: https://github.com/emeraldsanto/react-native-encrypted-storage/
+[react native render html]: https://meliorence.github.io/react-native-render-html/
+[react native vector icons]: https://github.com/oblador/react-native-vector-icons/
